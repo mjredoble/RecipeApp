@@ -26,7 +26,7 @@ class RecipeTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
     func configureView() {
         recipeImage.layer.cornerRadius = 20.0
         recipeImage.clipsToBounds = true

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,27 +87,44 @@
                     <navigationItem key="navigationItem" id="i9F-cw-QFx"/>
                     <connections>
                         <outlet property="tableView" destination="EiM-wF-eV9" id="Jjp-En-loq"/>
-                        <segue destination="b4m-ok-dag" kind="show" id="bih-cP-UAq"/>
+                        <segue destination="b4m-ok-dag" kind="show" identifier="RecipeDetailSegue" id="bih-cP-UAq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="479.19999999999999" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Detail View Controller-->
         <scene sceneID="4fW-va-vbP">
             <objects>
-                <viewController id="b4m-ok-dag" sceneMemberID="viewController">
+                <viewController id="b4m-ok-dag" customClass="RecipeDetailViewController" customModule="Food2Fork" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fUE-6Y-Fg8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sY1-7c-Fnl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sY1-7c-Fnl" secondAttribute="height" multiplier="75:46" id="PfQ-11-MP3"/>
+                                    <constraint firstAttribute="height" constant="230" id="VRN-yw-wpz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sY1-7c-Fnl" firstAttribute="trailing" secondItem="QCB-YW-0du" secondAttribute="trailing" id="Ryu-C5-Qwb"/>
+                            <constraint firstItem="sY1-7c-Fnl" firstAttribute="top" secondItem="QCB-YW-0du" secondAttribute="top" id="YxQ-kJ-Ugo"/>
+                            <constraint firstItem="sY1-7c-Fnl" firstAttribute="leading" secondItem="QCB-YW-0du" secondAttribute="leading" id="bgR-58-LVN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QCB-YW-0du"/>
                     </view>
+                    <connections>
+                        <outlet property="recipeImageView" destination="sY1-7c-Fnl" id="VOa-pY-Tus"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5o-Mg-5dT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="134"/>
+            <point key="canvasLocation" x="1300" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LLQ-vP-6ol">
@@ -116,6 +134,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ylk-Cw-w4o">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.80259317159999999" green="0.30906930570000002" blue="0.33283624049999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

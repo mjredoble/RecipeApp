@@ -20,8 +20,6 @@ class Recipe {
     var title: String
     
     init(dictionary: [String: AnyObject]) throws {
-        NSLog("Recipe Data: \(dictionary)")
-        
         f2fUrl = dictionary["f2f_url"] as! String
         imageUrl = dictionary["image_url"] as! String
         publisher = dictionary["publisher"] as! String

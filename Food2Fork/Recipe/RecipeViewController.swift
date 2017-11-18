@@ -10,7 +10,7 @@ import UIKit
 
 class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var dateSource = RecipeDataSource.self
+    var dataSource = RecipeDataSource.self
     var refreshControl = UIRefreshControl()
     
     @IBOutlet weak var tableView: UITableView!
@@ -59,7 +59,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     //MARK: - UITableView Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if RecipeDataSource.listOfReicpe.count > 0 {
-            return dateSource.listOfReicpe.count
+            return dataSource.listOfReicpe.count
         }
         
         return 0
@@ -67,9 +67,27 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
-        cell.recipe = dateSource.listOfReicpe[indexPath.row]
+        cell.recipe = dataSource.listOfReicpe[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let selectedRecipe = dataSource.listOfReicpe[indexPath.row]
+        self.performSegue(withIdentifier: "RecipeDetailSegue", sender: selectedRecipe)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RecipeDetailSegue" {
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+            let destinationViewController = segue.destination as! RecipeDetailViewController
+            destinationViewController.recipe = sender as? Recipe
+        }
     }
 }
 
