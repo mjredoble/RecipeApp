@@ -65,20 +65,51 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: - UITableView Delegate Methods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 28
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if recipe!.ingredients.count > 0 {
+        if section == 0 {
             return (recipe?.ingredients.count)!
         }
+        else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: -2, y: 0, width: self.view.frame.size.width + 4, height: 28))
+        view.backgroundColor = UIColor.lightGray
         
-        return 0
+        let label = UILabel(frame: CGRect(x: 16, y: 0, width: self.view.frame.size.width - 32, height: 28))
+        label.textColor = UIColor.black
+        
+        label.font = UIFont(name: "AvenirNext-Bold", size: 12)
+        label.textAlignment = .left
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        label.textColor = UIColor.black
+        
+        view.addSubview(label)
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section].uppercased()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")!
-        let text = recipe?.ingredients[indexPath.row]
-        
-        cell.textLabel?.text = text
-        
+        if indexPath.section == 0 {
+            let text = recipe?.ingredients[indexPath.row]
+            cell.textLabel?.text = text
+        }
+
         return cell
     }
 }

@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="niY-5I-hEZ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="561"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="576"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Gwk-Lw-MXF" userLabel="Header">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
@@ -170,8 +170,8 @@
                             <constraint firstItem="QCB-YW-0du" firstAttribute="bottom" secondItem="r8s-yo-tVD" secondAttribute="bottom" constant="5" id="I9f-8S-8S2"/>
                             <constraint firstItem="niY-5I-hEZ" firstAttribute="trailing" secondItem="QCB-YW-0du" secondAttribute="trailing" id="OXE-Y5-XEu"/>
                             <constraint firstItem="QCB-YW-0du" firstAttribute="bottom" secondItem="DE9-m4-AL1" secondAttribute="bottom" constant="5" id="XE7-f6-JYf"/>
-                            <constraint firstItem="niY-5I-hEZ" firstAttribute="bottom" secondItem="QCB-YW-0du" secondAttribute="bottom" constant="-42" id="byI-Gt-JeG"/>
                             <constraint firstItem="DE9-m4-AL1" firstAttribute="leading" secondItem="QCB-YW-0du" secondAttribute="leading" constant="5" id="l1C-ux-HgL"/>
+                            <constraint firstItem="DE9-m4-AL1" firstAttribute="top" secondItem="niY-5I-hEZ" secondAttribute="bottom" constant="1" id="oNe-0p-iXx"/>
                             <constraint firstItem="niY-5I-hEZ" firstAttribute="top" secondItem="QCB-YW-0du" secondAttribute="top" id="qiK-QQ-ID5"/>
                             <constraint firstItem="r8s-yo-tVD" firstAttribute="leading" secondItem="DE9-m4-AL1" secondAttribute="trailing" constant="51" id="w54-uc-ryH"/>
                         </constraints>
