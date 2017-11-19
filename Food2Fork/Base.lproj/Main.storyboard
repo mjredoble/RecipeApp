@@ -223,6 +223,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xN3-Vn-k7q">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwa-s0-kdu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
@@ -249,10 +253,6 @@
                                     <constraint firstItem="XN0-Gw-TGT" firstAttribute="leading" secondItem="pwa-s0-kdu" secondAttribute="leading" constant="8" id="whk-6j-DOX"/>
                                 </constraints>
                             </view>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xN3-Vn-k7q">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -260,7 +260,7 @@
                             <constraint firstItem="pwa-s0-kdu" firstAttribute="leading" secondItem="Sed-aC-gLc" secondAttribute="leading" id="K3b-fs-xdW"/>
                             <constraint firstItem="xN3-Vn-k7q" firstAttribute="trailing" secondItem="Sed-aC-gLc" secondAttribute="trailing" id="Tbe-8a-qAc"/>
                             <constraint firstItem="xN3-Vn-k7q" firstAttribute="leading" secondItem="Sed-aC-gLc" secondAttribute="leading" id="bOV-IP-DKe"/>
-                            <constraint firstItem="xN3-Vn-k7q" firstAttribute="top" secondItem="pwa-s0-kdu" secondAttribute="bottom" constant="8" id="mcf-a6-k5I"/>
+                            <constraint firstItem="xN3-Vn-k7q" firstAttribute="top" secondItem="pwa-s0-kdu" secondAttribute="bottom" constant="-40" id="mcf-a6-k5I"/>
                             <constraint firstItem="xN3-Vn-k7q" firstAttribute="bottom" secondItem="Sed-aC-gLc" secondAttribute="bottom" id="oz3-QQ-et7"/>
                             <constraint firstItem="pwa-s0-kdu" firstAttribute="trailing" secondItem="Sed-aC-gLc" secondAttribute="trailing" id="tYj-B8-Z22"/>
                         </constraints>
