@@ -8,12 +8,14 @@
 
 import UIKit
 
-class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+    var searchKey = ""
     var dataSource = RecipeDataSource.self
     var refreshControl = UIRefreshControl()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadData() {
-        RecipeDataSource.searchRecipe(keyword: "", successHandler: {
+        RecipeDataSource.searchRecipe(keyword: searchKey, successHandler: {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -54,6 +56,20 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     
     @objc func pullToRefresh() {
         reloadData()
+    }
+    
+    //MARK: - Search Bar Delegate Methods
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        NSLog("searchBarTextDidEndEditing....")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        NSLog("searchBarCancelButtonClicked....")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchKey = searchBar.text!
+        loadData()
     }
     
     //MARK: - UITableView Delegate Methods

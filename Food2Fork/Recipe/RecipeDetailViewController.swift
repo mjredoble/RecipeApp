@@ -60,7 +60,7 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         self.navigationItem.titleView = navigationTitle(text: recipe!.title)
         
         tableView.tableFooterView = UIView()
-        rankLabel.text = "Rank: \(recipe!.socialRank)"
+        rankLabel.text = "Rank: \(recipe!.socialRank ?? 0)"
         publisherLabel.text = recipe?.publisher
         
         recipeImageView.image = nil

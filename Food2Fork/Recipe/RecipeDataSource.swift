@@ -14,7 +14,11 @@ class RecipeDataSource {
     
     class func searchRecipe(keyword: String, successHandler: (()->Void)? = nil, errorHandler: (()->Void)? = nil) {
         let url = Constants.baseURL + "search"
-        let paramString = "key=\(Constants.key)" // add q = for search queries later
+        var paramString = "key=\(Constants.key)" // add q = for search queries later
+        
+        if keyword.count > 0 {
+            paramString.append("&q=\(keyword)")
+        }
         
         var list = [Recipe]()
         

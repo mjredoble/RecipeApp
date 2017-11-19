@@ -32,6 +32,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="BYZ-38-t0r" id="11g-ma-CFM"/>
+                                    </connections>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="60" id="Mia-lS-yCW" customClass="RecipeTableViewCell" customModule="Food2Fork" customModuleProvider="target">
@@ -87,6 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="i9F-cw-QFx"/>
                     <connections>
+                        <outlet property="searchBar" destination="KFk-it-Inh" id="M9F-7U-KOm"/>
                         <outlet property="tableView" destination="EiM-wF-eV9" id="Jjp-En-loq"/>
                         <segue destination="b4m-ok-dag" kind="show" identifier="RecipeDetailSegue" id="bih-cP-UAq"/>
                     </connections>

@@ -15,7 +15,7 @@ class Recipe {
     var publisher: String
     var publisherUrl: String
     var recipeId: Double?
-    var socialRank: Int
+    var socialRank: Int?
     var sourceUrl: String
     var title: String
     var ingredients = [String]()
@@ -30,7 +30,10 @@ class Recipe {
             recipeId = recId
         }
         
-        socialRank = dictionary["social_rank"] as! Int
+        if let rank = (dictionary["social_rank"] as? Int) {
+            socialRank = rank
+        }
+    
         sourceUrl = dictionary["source_url"] as! String
         title = dictionary["title"] as! String
     }
