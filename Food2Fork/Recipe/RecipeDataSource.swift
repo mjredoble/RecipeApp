@@ -47,7 +47,7 @@ class RecipeDataSource {
         })
     }
     
-    class func getRecipe(recipeId: Double, successHandler: (()->Void)? = nil, errorHandler: (()->Void)? = nil) {
+    class func getIngredients(recipeId: Double, successHandler: (([String])->Void)? = nil, errorHandler: (()->Void)? = nil) {
         let parameters = "key=\(Constants.key)&rId=\(Int(recipeId))"
         let url = Constants.baseURL + "get"
         
@@ -58,9 +58,12 @@ class RecipeDataSource {
             successHandler: { data, response in
                 do {
                     let receivedData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-                    print(receivedData)
-                    
-                    successHandler!()
+                    if let recipe = receivedData["recipe"] {
+                        if let ingredients = recipe["ingredients"] {
+                            successHandler!(ingredients as! [String])
+                        }
+                    }
+
                 }
                 catch {
                     NSLog("Error parsing recipe data!!! ")

@@ -18,6 +18,7 @@ class Recipe {
     var socialRank: Int
     var sourceUrl: String
     var title: String
+    var ingredients = [String]()
     
     init(dictionary: [String: AnyObject]) throws {
         f2fUrl = dictionary["f2f_url"] as! String

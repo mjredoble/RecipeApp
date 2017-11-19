@@ -46,10 +46,12 @@ class RecipeDetailViewController: UIViewController {
     }
     
     func loadData() {
-        RecipeDataSource.getRecipe(recipeId:recipe!.recipeId!, successHandler: {
-            
+        RecipeDataSource.getIngredients(
+            recipeId:recipe!.recipeId!,
+            successHandler: { result in
+            self.recipe?.ingredients.append(contentsOf: result)
         }, errorHandler: {
-            
+            NSLog("Error getIngredients API call......")
         })
     }
 }
