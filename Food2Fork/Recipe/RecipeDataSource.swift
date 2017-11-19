@@ -30,16 +30,22 @@ class RecipeDataSource {
             successHandler: { data, response in
                 do {
                     let receivedData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-                    let jsonArray = receivedData["recipes"] as! [[String: AnyObject]]
-                    for item in jsonArray {
-                        let recipe = try Recipe(dictionary: item)
-                        list.append(recipe)
+                    
+                    if let jsonArray = receivedData["recipes"] {
+                        for item in jsonArray as! [[String: AnyObject]] {
+                            let recipe = try Recipe(dictionary: item)
+                            list.append(recipe)
+                        }
+                        
+                        self.listOfReicpe.removeAll()
+                        self.listOfReicpe.append(contentsOf: list)
+                        
+                        successHandler!()
                     }
-                    
-                    self.listOfReicpe.removeAll()
-                    self.listOfReicpe.append(contentsOf: list)
-                    
-                    successHandler!()
+                    else {
+                        NSLog("Error fetching recipe data!!! ")
+                        errorHandler!()
+                    }
                 }
                 catch {
                     NSLog("Error parsing recipe data!!! ")
