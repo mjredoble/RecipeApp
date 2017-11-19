@@ -59,12 +59,11 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     //MARK: - Search Bar Delegate Methods
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        NSLog("searchBarTextDidEndEditing....")
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        NSLog("searchBarCancelButtonClicked....")
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            searchKey = searchText
+            loadData()
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
