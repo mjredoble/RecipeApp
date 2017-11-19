@@ -115,7 +115,7 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
             return (recipe?.ingredients.count)!
         }
         else {
-            return 1
+            return 2
         }
     }
     
@@ -148,12 +148,25 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as! IngredientTableViewCell
             cell.ingredient = (recipe?.ingredients[indexPath.row])!
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! InfoTableViewCell
-            cell.recipe = self.recipe
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            
+            if indexPath.row == 0 {
+                cell.cellText = "View Instruction"
+            }
+            else {
+                cell.cellText = "View Original"
+            }
+            
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

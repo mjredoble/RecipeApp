@@ -10,7 +10,7 @@ import UIKit
 
 class InfoTableViewCell: UITableViewCell {
     
-    var recipe: Recipe? {
+    var cellText: String? {
         didSet {
             configureView()
         }
@@ -25,6 +25,8 @@ class InfoTableViewCell: UITableViewCell {
     }
 
     func configureView() {
-        //self.textLabel?.text = "XX"
+        self.textLabel?.textColor = UIColor.blue
+        self.textLabel?.text = cellText
+        self.textLabel?.textAlignment = .center
     }
 }
