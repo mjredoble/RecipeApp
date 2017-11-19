@@ -62,8 +62,15 @@ class RecipeDataSource {
                         if let ingredients = recipe["ingredients"] {
                             successHandler!(ingredients as! [String])
                         }
+                        else {
+                            NSLog("Error parsing recipe data!!! ")
+                            errorHandler!()
+                        }
                     }
-
+                    else {
+                        NSLog("Error parsing recipe data!!! ")
+                        errorHandler!()
+                    }
                 }
                 catch {
                     NSLog("Error parsing recipe data!!! ")

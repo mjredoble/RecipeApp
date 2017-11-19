@@ -40,14 +40,41 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         return label
     }
     
+    func emptyView(frame: CGRect, withText text: String) -> UIView {
+        let emptyLabel = UILabel(frame: CGRect( x: 20, y: (frame.size.height / 2), width: frame.size.width - 40, height: 100))
+        emptyLabel.backgroundColor = UIColor.clear
+        emptyLabel.textAlignment = .center
+        emptyLabel.textColor = UIColor.darkGray
+        emptyLabel.font = UIFont(name: "AvenirNext-Medium", size: 16.0)
+        emptyLabel.numberOfLines = 0
+        emptyLabel.text = text
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.white
+        backgroundView.addSubview(emptyLabel)
+        
+        return backgroundView
+    }
+    
     func configureView() {
         self.navigationItem.titleView = navigationTitle(text: recipe!.title)
         
+        tableView.tableFooterView = UIView()
         rankLabel.text = "Rank: \(recipe!.socialRank)"
         publisherLabel.text = recipe?.publisher
+        
         recipeImageView.image = nil
         if let imageURL = recipe?.imageUrl {
             recipeImageView.loadImageUsingCache(withUrl: imageURL)
+        }
+    }
+    
+    func configureTableViews() {
+        if recipe?.ingredients.count == 0 {
+            tableView.backgroundView = emptyView(frame: tableView.frame, withText: "No data available")
+        }
+        else {
+            tableView.backgroundView = nil
         }
     }
     
@@ -57,16 +84,26 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
             successHandler: { result in
                 DispatchQueue.main.async {
                     self.recipe?.ingredients.append(contentsOf: result)
+                    self.configureTableViews()
                     self.tableView.reloadData()
                 }
         }, errorHandler: {
+            DispatchQueue.main.async {
+                self.configureTableViews()
+                self.tableView.reloadData()
+            }
+            
             NSLog("Error getIngredients API call......")
         })
     }
     
     //MARK: - UITableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitles.count
+        if recipe!.ingredients.count > 0 {
+            return sectionTitles.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -83,20 +120,24 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: -2, y: 0, width: self.view.frame.size.width + 4, height: 28))
-        view.backgroundColor = UIColor.lightGray
-        
-        let label = UILabel(frame: CGRect(x: 16, y: 0, width: self.view.frame.size.width - 32, height: 28))
-        label.textColor = UIColor.black
-        
-        label.font = UIFont(name: "AvenirNext-Bold", size: 12)
-        label.textAlignment = .left
-        label.text = self.tableView(tableView, titleForHeaderInSection: section)
-        label.textColor = UIColor.black
-        
-        view.addSubview(label)
-        
-        return view
+        if recipe!.ingredients.count > 0 {
+            let view = UIView(frame: CGRect(x: -2, y: 0, width: self.view.frame.size.width + 4, height: 28))
+            view.backgroundColor = UIColor.lightGray
+            
+            let label = UILabel(frame: CGRect(x: 16, y: 0, width: self.view.frame.size.width - 32, height: 28))
+            label.textColor = UIColor.black
+            
+            label.font = UIFont(name: "AvenirNext-Bold", size: 12)
+            label.textAlignment = .left
+            label.text = self.tableView(tableView, titleForHeaderInSection: section)
+            label.textColor = UIColor.black
+            
+            view.addSubview(label)
+            
+            return view
+        }
+ 
+        return nil
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -104,10 +145,9 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as! IngredientTableViewCell
         if indexPath.section == 0 {
-            let text = recipe?.ingredients[indexPath.row]
-            cell.textLabel?.text = text
+            cell.ingredient = (recipe?.ingredients[indexPath.row])!
         }
 
         return cell
