@@ -82,9 +82,6 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RecipeDetailSegue" {
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
             let destinationViewController = segue.destination as! RecipeDetailViewController
             destinationViewController.recipe = sender as? Recipe
         }

@@ -25,7 +25,7 @@ class InfoTableViewCell: UITableViewCell {
     }
 
     func configureView() {
-        self.textLabel?.textColor = UIColor.blue
+        self.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 13)
         self.textLabel?.text = cellText
         self.textLabel?.textAlignment = .center
     }

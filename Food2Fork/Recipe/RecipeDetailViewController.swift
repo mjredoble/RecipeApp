@@ -122,7 +122,7 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if recipe!.ingredients.count > 0 {
             let view = UIView(frame: CGRect(x: -2, y: 0, width: self.view.frame.size.width + 4, height: 28))
-            view.backgroundColor = UIColor.lightGray
+            view.backgroundColor = UIColor(displayP3Red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1)
             
             let label = UILabel(frame: CGRect(x: 16, y: 0, width: self.view.frame.size.width - 32, height: 28))
             label.textColor = UIColor.black
@@ -168,5 +168,25 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        var urlToOpen = ""
+        
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                urlToOpen = recipe!.f2fUrl
+            }
+            else {
+                urlToOpen = recipe!.publisherUrl
+            }
+            
+            self.performSegue(withIdentifier: "WebViewSegue", sender: urlToOpen)
+        }
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "WebViewSegue" {
+            let destinationViewController = segue.destination as! DetailWebViewController
+            destinationViewController.urlToOpen = sender as? String
+        }
     }
 }
