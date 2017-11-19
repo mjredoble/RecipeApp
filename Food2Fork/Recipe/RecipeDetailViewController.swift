@@ -19,6 +19,11 @@ class RecipeDetailViewController: UIViewController {
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
+    
     func navigationTitle(text: String) -> UILabel {
         let label = UILabel()
         
@@ -38,5 +43,13 @@ class RecipeDetailViewController: UIViewController {
         if let imageURL = recipe?.imageUrl {
             recipeImageView.loadImageUsingCache(withUrl: imageURL)
         }
+    }
+    
+    func loadData() {
+        RecipeDataSource.getRecipe(recipeId:recipe!.recipeId!, successHandler: {
+            
+        }, errorHandler: {
+            
+        })
     }
 }

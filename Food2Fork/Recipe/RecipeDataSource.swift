@@ -9,17 +9,19 @@
 import UIKit
 
 class RecipeDataSource {
-    typealias SuccessHandler = (Data, URLResponse?) -> ()
-    typealias ErrorHandler = (Error, URLResponse?) -> ()
     
     static var listOfReicpe = [Recipe]()
     
     class func searchRecipe(keyword: String, successHandler: (()->Void)? = nil, errorHandler: (()->Void)? = nil) {
         let url = Constants.baseURL + "search"
+        let paramString = "key=\(Constants.key)" // add q = for search queries later
+        
         var list = [Recipe]()
         
-        self.makeRequest(
+        Communication.makeRequest(
             path: url,
+            paramString: paramString,
+            httpMethod: "POST",
             successHandler: { data, response in
                 do {
                     let receivedData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -45,27 +47,29 @@ class RecipeDataSource {
         })
     }
     
-    static func makeRequest(path: String, successHandler: @escaping SuccessHandler, errorHandler: @escaping ErrorHandler) {
-        let request = NSMutableURLRequest(url: NSURL(string: path)! as URL)
+    class func getRecipe(recipeId: Double, successHandler: (()->Void)? = nil, errorHandler: (()->Void)? = nil) {
+        let parameters = "key=\(Constants.key)&rId=\(Int(recipeId))"
+        let url = Constants.baseURL + "get"
         
-        let session = URLSession.shared
-        request.httpMethod = "POST"
-        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        
-        let paramString = "key=\(Constants.key)"
-        request.httpBody = paramString.data(using: String.Encoding.utf8)
-
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-            if let _ = response {
-                successHandler(data!, response)
-            }
-            else {
-                NSLog("error Serializing JSON: \(error!)")
-                errorHandler(error!, response)
-            }
+        Communication.makeRequest(
+            path: url,
+            paramString: parameters,
+            httpMethod: "POST",
+            successHandler: { data, response in
+                do {
+                    let receivedData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+                    print(receivedData)
+                    
+                    successHandler!()
+                }
+                catch {
+                    NSLog("Error parsing recipe data!!! ")
+                    errorHandler!()
+                }
+        },
+            errorHandler: { error ,_ in
+                NSLog("Error fetching recipe data!!! \(error)")
+                errorHandler!()
         })
-        
-        task.resume()
     }
-    
 }
