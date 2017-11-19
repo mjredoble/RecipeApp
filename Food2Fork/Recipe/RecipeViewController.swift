@@ -38,9 +38,27 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.tableFooterView = UIView()
     }
     
+    func configureTableViews() {
+        if dataSource.listOfReicpe.count == 0 {
+            tableView.backgroundView = UIHelper.emptyView(frame: tableView.frame, withText: "No data available")
+        }
+        else {
+            tableView.backgroundView = nil
+        }
+    }
+    
     func loadData() {
-        RecipeDataSource.searchRecipe(keyword: searchKey, successHandler: {
+        RecipeDataSource.searchRecipe(
+            keyword: searchKey,
+            successHandler: {
             DispatchQueue.main.async {
+                self.configureTableViews()
+                self.tableView.reloadData()
+            }
+        },
+            errorHandler: {
+            DispatchQueue.main.async {
+                self.configureTableViews()
                 self.tableView.reloadData()
             }
         })
@@ -49,6 +67,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     func reloadData() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             self.loadData()
+            self.configureTableViews()
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
         })

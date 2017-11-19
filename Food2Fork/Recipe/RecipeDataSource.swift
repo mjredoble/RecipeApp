@@ -17,7 +17,8 @@ class RecipeDataSource {
         var paramString = "key=\(Constants.key)" // add q = for search queries later
         
         if keyword.count > 0 {
-            paramString.append("&q=\(keyword)")
+            let processedKeyword = keyword.replacingOccurrences(of: " ", with: ",")
+            paramString.append("&q=\(processedKeyword)")
         }
         
         var list = [Recipe]()
