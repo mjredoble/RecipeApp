@@ -8,12 +8,16 @@
 
 import UIKit
 
-class RecipeDetailViewController: UIViewController {
+class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var recipe: Recipe?
+    var sectionTitles = ["Ingredients", "Info"]
     
     @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var publisherLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -39,6 +43,8 @@ class RecipeDetailViewController: UIViewController {
     func configureView() {
         self.navigationItem.titleView = navigationTitle(text: recipe!.title)
         
+        rankLabel.text = "Rank: \(recipe!.socialRank)"
+        publisherLabel.text = recipe?.publisher
         recipeImageView.image = nil
         if let imageURL = recipe?.imageUrl {
             recipeImageView.loadImageUsingCache(withUrl: imageURL)
@@ -49,9 +55,30 @@ class RecipeDetailViewController: UIViewController {
         RecipeDataSource.getIngredients(
             recipeId:recipe!.recipeId!,
             successHandler: { result in
-            self.recipe?.ingredients.append(contentsOf: result)
+                DispatchQueue.main.async {
+                    self.recipe?.ingredients.append(contentsOf: result)
+                    self.tableView.reloadData()
+                }
         }, errorHandler: {
             NSLog("Error getIngredients API call......")
         })
+    }
+    
+    //MARK: - UITableView Delegate Methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if recipe!.ingredients.count > 0 {
+            return (recipe?.ingredients.count)!
+        }
+        
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell")!
+        let text = recipe?.ingredients[indexPath.row]
+        
+        cell.textLabel?.text = text
+        
+        return cell
     }
 }
