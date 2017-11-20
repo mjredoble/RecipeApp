@@ -31,7 +31,10 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     func configureView() {
         self.navigationItem.titleView = UIHelper.navigationTitle(text: recipe!.title)
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50.0
         tableView.tableFooterView = UIView()
+        
         rankLabel.text = "Rank: \(recipe!.socialRank ?? 0)"
         publisherLabel.text = recipe?.publisher
         
@@ -82,6 +85,14 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
             return 28
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return (recipe?.ingredients.count)!

@@ -51,7 +51,7 @@
                                                         <constraint firstAttribute="width" constant="40" id="vTP-zo-Gpu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOg-UZ-9KC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOg-UZ-9KC">
                                                     <rect key="frame" x="58" y="24" width="279" height="11"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -134,7 +134,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwQ-UQ-ZP9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwQ-UQ-ZP9">
                                                     <rect key="frame" x="15" y="9" width="352" height="32"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -142,10 +142,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="dwQ-UQ-ZP9" secondAttribute="bottom" constant="8.5" id="Dx7-Q8-G4e"/>
-                                                <constraint firstItem="dwQ-UQ-ZP9" firstAttribute="top" secondItem="B4U-Kq-YWl" secondAttribute="top" constant="9" id="HMt-yX-127"/>
-                                                <constraint firstItem="dwQ-UQ-ZP9" firstAttribute="leading" secondItem="B4U-Kq-YWl" secondAttribute="leading" constant="15" id="Mep-FI-Rd2"/>
-                                                <constraint firstAttribute="trailing" secondItem="dwQ-UQ-ZP9" secondAttribute="trailing" constant="8" id="gLZ-7V-1qZ"/>
+                                                <constraint firstItem="dwQ-UQ-ZP9" firstAttribute="leading" secondItem="B4U-Kq-YWl" secondAttribute="leading" constant="15" id="816-Ex-qvw"/>
+                                                <constraint firstAttribute="trailing" secondItem="dwQ-UQ-ZP9" secondAttribute="trailing" constant="8" id="AF1-S9-6pq"/>
+                                                <constraint firstItem="dwQ-UQ-ZP9" firstAttribute="top" secondItem="B4U-Kq-YWl" secondAttribute="top" constant="9" id="I8Y-by-vhe"/>
+                                                <constraint firstAttribute="bottom" secondItem="dwQ-UQ-ZP9" secondAttribute="bottom" constant="8.5" id="KdX-84-NNb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -166,14 +166,6 @@
                                     <outlet property="delegate" destination="b4m-ok-dag" id="46c-YE-whl"/>
                                 </connections>
                             </tableView>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" selectionStyle="default" indentationWidth="10" translatesAutoresizingMaskIntoConstraints="NO" id="5CW-lx-VMp">
-                                <rect key="frame" x="10" y="74" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5CW-lx-VMp" id="XfW-DH-LQQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Rank:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8s-yo-tVD">
                                 <rect key="frame" x="315" y="646" width="55" height="21"/>
                                 <constraints>

@@ -35,6 +35,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60.0
         tableView.tableFooterView = UIView()
     }
     
@@ -97,6 +99,14 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
